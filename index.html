@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Web Components</title>
     <link rel="stylesheet" href="./modal.css">
-    <script src="./modal.js" defer></script>
-</head>
-<body>
-    <gk-modal>
-        <p>Do you agree to pay the full amount?</p>
-    </gk-modal>
+    <script src="modal.js"></script>
+  </head>
+  <body>
+    <uc-modal>
+      <h1 slot="title">Please Confirm</h1>
+      <p>With your confirmation you agree to pay the full amount!</p>
+    </uc-modal>
     <p>Please confirm your choice.</p>
     <button>Show Details & Confirm</button>
-</body>
+    <script>
+        const confirmButton = document.querySelector('button');
+        const modal = document.querySelector('uc-modal');
+
+        modal.addEventListener('confirm', () => {
+            console.log('Confirmed...');
+        });
+
+        modal.addEventListener('cancel', () => {
+            console.log('Cancelled...');
+        });
+
+        confirmButton.addEventListener('click', () => {
+            if (!modal.isOpen) {
+                modal.open();
+                console.log('Opening...');
+            }
+        });
+    </script>
+  </body>
 </html>
